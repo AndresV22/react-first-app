@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Product from "./components/Product";
+import Car from "./components/Car";
 
 function App() {
+  //Producto
+  const [products, setProduct] = useState([
+    { id: 1, name: "Polera", content: "Color: Azul" },
+    { id: 2, name: "Pantalones", content: "Color: Verde" },
+    { id: 3, name: "Shorts", content: "Color: Blanco" },
+  ]);
+
+  //Carrito
+  const [car, addProduct] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header title="Mi primera aplicación en REACT !" />
+      {products.map((product) => (
+        <Product
+          key={product.id}
+          product={product}
+          products={products}
+          car={car}
+          addProduct={addProduct}
+        />
+      ))}
+      <Car car={car} addProduct={addProduct} />
+      <Footer date="2019" />
+    </Fragment>
   );
 }
 
